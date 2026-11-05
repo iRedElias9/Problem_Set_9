@@ -7,61 +7,7 @@ format: pdf
 
 I used Claude, an AI assistant from Anthropic, to help create the data sets. Claude cleaned the Spotify track list, standardized artist names, assigned tracks to projects, calculated tie weights and node positions, and built the node and edge lists. I provided the track list and reviewed the results against Spotifys track list.
 
-
-## Introduction
-
-This project uses two networks to show how Drake's collaborations have changed over time. The first looks at guests on his albums. The second looks at his guest appearances on other artists' songs. Using prior social context this project will also analyze how the connections remain after a public conflict.
-
-## Step 1: The Networks
-
-**Album network.** The nodes are 21 Drake projects, including albums, mixtapes, EPs, and a compilation, and the 75 artists credited on them. A tie means an artist is credited on that project. Tie strength is the number of credited tracks. Drake is not a node because he would connect to every artist.
-
-**Guest network.** The nodes are years and the 104 artists whose songs include Drake as a guest. A tie means Drake appeared on that artist's song in that year. Tie strength is the number of songs that year.
-
-Both are affiliation networks, because ties connect artists to albums or years rather than directly to each other.
-
 {{< pagebreak >}}
-
-## Step 2: Encoding the Networks
-
-I encoded each network as a node list and an edge list in CSV files. The album network uses `drake_nodes.csv` and `drake_edges.csv`. The guest network uses `drake_guest_nodes.csv` and `drake_guest_edges.csv`.
-
-Both networks come from a 568-track fan-made Spotify playlist of Drake's songs and features. For the album network, I matched Drake-led tracks with guest credits to 21 projects released from 2009 to 2026. I counted every credited artist as a guest and treated Future on *What a Time to Be Alive*, 21 Savage on *Her Loss*, and PARTYNEXTDOOR on *\$ome \$exy \$ongs 4 U* as co-leads. I excluded standalone singles and soundtrack songs. This left 75 guest artists and 116 ties.
-
-For the guest network, I treated the first listed artist as the host when that artist was not Drake. I excluded *\$ome \$exy \$ongs 4 U*, repeated remixes by the same host, and one track credited only to "Various Artists." This left 194 guest songs.
-
-
-
-{{< pagebreak >}}
-
-## Step 3: Reading the Networks into R and iGraph
-
-I read each node list and edge list into R with `read.csv()`. I then used `graph_from_data_frame()` to convert each pair of files into an iGraph network. The edge list goes in the `d` argument, and the node list goes in the `vertices` argument. Using a node list keeps artists' details, such as their type and song count, attached to each node, so I could use them later to set colors, sizes, and labels.
-
-```{r}
-#| eval: false
-library("igraph")
-
-#Load and convert the album network
-album_nodes <- read.csv("drake_nodes.csv", header=T, as.is=T)
-album_links <- read.csv("drake_edges.csv", header=T, as.is=T)
-album_net <- graph_from_data_frame(d=album_links,
-                                   vertices=album_nodes,
-                                   directed=F)
-
-#Load and convert the guest network
-guest_nodes <- read.csv("drake_guest_nodes.csv", header=T, as.is=T)
-guest_links <- read.csv("drake_guest_edges.csv", header=T, as.is=T)
-guest_net <- graph_from_data_frame(d=guest_links,
-                                   vertices=guest_nodes,
-                                   directed=F)
-```
-
-Both networks are undirected because a tie simply links an artist to a project or year. The album network has 21 projects, 75 artists, and 116 ties. The guest network has 21 years, 104 artists, and 165 ties, with weights covering all 194 guest songs. Both node lists also include label rows for the scale, which are not counted here. I checked each network by printing `V()` and `E()` before plotting.
-
-{{< pagebreak >}}
-
-## Steps 4: Plotting and Visualizing the Networks
 
 ![Guests on Drake's projects, 2009 to 2026.](drake_network.png){#fig-album}
 
