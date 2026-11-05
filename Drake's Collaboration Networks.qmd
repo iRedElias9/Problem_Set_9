@@ -10,7 +10,7 @@ I used Claude, an AI assistant from Anthropic, to help create the data sets. Cla
 
 ## Introduction
 
-This project uses two networks to show how Drake's collaborations have changed over time. The first looks at guests on his albums. The second looks at his guest appearances on other artists' songs.
+This project uses two networks to show how Drake's collaborations have changed over time. The first looks at guests on his albums. The second looks at his guest appearances on other artists' songs. Using prior social context this project will also analyze how the connections remain after a public conflict.
 
 ## Step 1: The Networks
 
@@ -30,7 +30,7 @@ Both networks come from a 568-track fan-made Spotify playlist of Drake's songs a
 
 For the guest network, I treated the first listed artist as the host when that artist was not Drake. I excluded *\$ome \$exy \$ongs 4 U*, repeated remixes by the same host, and one track credited only to "Various Artists." This left 194 guest songs.
 
-Before reading the data into R, I exported the playlist's track list with Spotlistr, added release years, and separated each track into lead artist, featured artists, title, and year. I standardized artist names and added Drake to four tracks that named him in the title but not in the credits. I then calculated tie weights, song counts, and each artist's average year or project position. I also added label rows for the scale.
+
 
 {{< pagebreak >}}
 
@@ -73,7 +73,7 @@ In the album network, blue marks returning guests, gray marks one-time guests, a
 
 ![Drake's guest appearances, 2005 to 2026.](drake_guest_network.png){#fig-guest}
 
-In the guest network, blue marks hosts who are also credited on a Drake-led track, and gold marks artists who only hosted Drake. Red year boxes mark four major public disputes: Kendrick Lamar's "Control" verse in 2013, the Meek Mill feud in 2015, the Kanye West feud in 2018, and the Kendrick Lamar feud in 2024. Rows with several artists are spaced evenly in time order, so the lines show the actual years.
+In the guest network, blue marks hosts who are also credited on a Drake-led track, and gold marks artists who only hosted Drake. Red year boxes mark four major public disputes: Kendrick Lamar's "Control" verse in 2013, the Meek Mill feud in 2015, the Kanye West feud in 2018, and the Kendrick Lamar feud in 2024. Rows with several artists are spaced evenly in time order.
 
 {{< pagebreak >}}
 
@@ -85,13 +85,13 @@ In the guest network, blue marks hosts who are also credited on a Drake-led trac
 
 ### Collaborations and Public Feuds
 
-Drake fans know the beefs, but the playlist shows the timing behind them. The bridges often fell long before the diss tracks did. The Weeknd's "Live For" and ASAP Rocky's "F**kin' Problems" date to 2013, more than a decade before both sided against Drake in 2024. Rick Ross shared 15 tracks with Drake, but "You Only Live Twice" in 2021 was the last, three years before "Push Ups." Kendrick Lamar's ties ended in 2013, the year of his "Control" verse, and never came back. Still, beef isn't always final. Meek Mill went from "Back to Back" to "Going Bad," Chris Brown returned with "No Guidance," and Future came back on "Ran to Atlanta" in 2026 after a gap in shared tracks from 2023 to 2025.
+Drake fans know the beefs, but the playlist shows the timing behind them. The bridges often fell long before the diss tracks did. The Weeknd's "Live For" and ASAP Rocky's "F**kin' Problems" were released in 2013, more than a decade before both sided against Drake in 2024. Rick Ross shared 15 tracks with Drake, but "You Only Live Twice" in 2021 was the last, three years before "Push Ups." Kendrick Lamar's ties ended in 2013, the year of his "Control" verse, and never came back. Still, beef isn't always final. Meek Mill went from "Back to Back" to "Going Bad," Chris Brown returned with "No Guidance," and Future came back on "Ran to Atlanta" in 2026 after a gap in shared tracks from 2023 to 2025.
 
 These patterns suggest that a quiet period in the network can come before a public feud, but they do not show that feuds ended these collaborations. I selected these artists because their conflicts were publicly reported, and private relationships may have changed earlier.
 
 ## Limitations
 
-The years in the guest network are Spotify release dates, so some older songs appear later than their original release. The playlist is fan-made, and Drake is not listed in the credits of 23 tracks. The album network covers 21 projects and leaves out 10 standalone singles and soundtrack songs. I assigned tracks to projects by hand because the playlist does not include album names.
+The years in the guest network are Spotify release dates, so some older songs appear later than their original release. The playlist is fan-made, and Drake is not listed in the credits of 23 tracks. The album network covers 21 projects and leaves out 10 standalone singles and soundtrack songs.
 
 {{< pagebreak >}}
 
